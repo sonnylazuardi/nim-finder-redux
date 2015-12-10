@@ -6,7 +6,6 @@ function nims(state = {
     nims: [],
     currentPage: 1,
 }, action = {}) {
-    console.log('action', action);
     switch (action.type) {
         case REQUEST_NIM: 
             return Object.assign({}, state, {

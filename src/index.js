@@ -32,11 +32,13 @@ class App extends Component {
                     {this.props.isFetching ?
                         'Loading...'
                         :
-                        {this.props.nims.length > 0 ?
-                            <button onClick={() => {
+                        (this.props.nims.length > 0 ?
+                            (
+                                <button onClick={() => {
                                     this.props.dispatch(loadMore(this.refs.name.value))
                                 }}>Load More...</button>
-                            : null}}
+                            )
+                            : null)}
                     </ul>
 
                 </div>

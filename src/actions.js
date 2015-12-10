@@ -1,6 +1,6 @@
 import Parse from 'parse';
 
-Parse.initialize('6GR14ZdXnygzDxrcuwcULVp5k4ROUtRnnDgUqYD6', '7BiQmwbNXm1qZ6n5Mn69TCW03jfVAGEBy1cuX4M0');
+Parse.initialize('<Your Parse Key>', '<Your Parse Secret>');
 
 /* action types & creators */
 
@@ -61,10 +61,8 @@ export function searchNim(name) {
 
 export function loadMore(name) {
     return function (dispatch, getState) {
-        console.log(getState());
         dispatch(requestLoadMore(name));
         let page = getState().nims.currentPage + 1;
-        console.log(page);
         let query = {
             query: name,
             page
