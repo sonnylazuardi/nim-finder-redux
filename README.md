@@ -25,6 +25,8 @@ Don't forget to change
 
 Please ask @azaky to get the key :D
 
+The data was crawled in April 2015 and has 13855 records, which means that there are 13855 students who take at least a class in the second semester of 2014/2015. Those data are stored in Parse.
+
 ## Demo
 
 http://sonnylazuardi.github.io/nim-finder-redux

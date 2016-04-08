@@ -1,6 +1,12 @@
-import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
-import thunkMiddleware from 'redux-thunk'
+import React, {
+    Component,
+    AppRegistry,
+    View,
+    TextInput,
+    Text,
+    TouchableOpacity
+} from 'react-native';
+import thunkMiddleware from 'redux-thunk';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider, connect } from 'react-redux';
 import reducers from './reducers';
@@ -13,36 +19,48 @@ const createStoreWithMiddleware = applyMiddleware(
 const store = createStoreWithMiddleware(reducers);
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            search: ''
+        };
+    }
     handleSubmit(e) {
-        e.preventDefault();
-        this.props.dispatch(searchNim(this.refs.name.value));
+        if (e)
+            e.preventDefault();
+        this.props.dispatch(searchNim(this.state.search));
     }
     render() {
         return (
-            <div>
-                <form onSubmit={this.handleSubmit.bind(this)}>
-                    <input type="text" ref="name" />
-                    <button type="submit">Cari</button>
-                </form>
-                <div>
-                    <ul>
+            <View>
+                <View>
+                    <TextInput onChangeText={(search) => this.setState({search})} value={this.state.search} />
+                    <TouchableOpacity onPress={this.handleSubmit.bind(this)}>
+                        <View style={{padding: 10, backgroundColor: '#ddd'}}>
+                            <Text>{'Cari'}</Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
+                <View>
                     {this.props.nims.map(item => (
-                        <li key={item.nim}>{item.nim} - {item.name}</li>
+                        <Text key={item.nim}>{item.nim} - {item.name}</Text>
                     ))}
                     {this.props.isFetching ?
                         'Loading...'
                         :
                         (this.props.nims.length > 0 ?
                             (
-                                <button onClick={() => {
-                                    this.props.dispatch(loadMore(this.refs.name.value))
-                                }}>Load More...</button>
+                                <TouchableOpacity onPress={() => {
+                                    this.props.dispatch(loadMore(this.state.search))
+                                }}>
+                                    <View style={{padding: 10, backgroundColor: '#ddd'}}>
+                                        <Text>Load More...</Text>
+                                    </View>
+                                </TouchableOpacity>
                             )
                             : null)}
-                    </ul>
-
-                </div>
-            </div>
+                </View>
+            </View>
         );
     }
 };
@@ -58,10 +76,12 @@ function mapStateToProps(state) {
 }
 
 const AppContainer = connect(mapStateToProps)(App);
+const NimFinder = () => {
+    return (
+        <Provider store={store}>
+            <AppContainer />
+        </Provider>
+    )
+};
 
-ReactDOM.render(
-    <Provider store={store}>
-        <AppContainer />
-    </Provider>,
-    document.getElementById('root')
-);
+export default NimFinder;

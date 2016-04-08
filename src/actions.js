@@ -1,6 +1,6 @@
 import Parse from 'parse';
 
-Parse.initialize('<Your Parse Key>', '<Your Parse Secret>');
+Parse.initialize('6GR14ZdXnygzDxrcuwcULVp5k4ROUtRnnDgUqYD6', '7BiQmwbNXm1qZ6n5Mn69TCW03jfVAGEBy1cuX4M0');
 
 /* action types & creators */
 
