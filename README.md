@@ -1,36 +1,33 @@
-# nim-finder-redux
+## Running the example app
 
-ITB NIM Finder App with Redux, ReactJS, Babel.
-Data from Ahmad Zaky : https://github.com/azaky/nim-finder
+Install the example app dependencies and start the server:
 
-![nimfinderapp](https://lh3.googleusercontent.com/-xJD_0V9az7Y/VmksqUSnhnI/AAAAAAAACAk/WYwpQArfraA/s0/Screen+Shot+2015-12-10+at+2.37.55+PM.png "nimfinder")
+```
+npm install
+npm start
+```
 
-## Installing
-	
-Change directory to current repo 
+**iOS**: Open the Xcode project and build/run.
 
-	npm install -g browserify uglifyjs
+**Android**:
 
-	npm install
+```shell
+npm run android-setup-port
+react-native run-android
+```
 
-	browserify -t [ babelify --presets [ react es2015 ] ] src/index.js | uglifyjs -o dist/index.js
+**NOTE**: In order to be able to run android-setup-port you need to run Android 5.0 since adb reverse was introduced at Android 5.0
 
-	python -m SimpleHTTPServer
+To run with hot reload (iOS-only):
 
-Open `http://localhost:8000/`
+```
+npm run hot
+```
 
-Don't forget to change
+Hot reload only works with the web socket executor (hit CMD+D in the simulator). See [the explanatory note](https://github.com/mjohnston/react-native-webpack-server#hot-module-replacement).
 
-	Parse.initialize('<Your Parse Key>', '<Your Parse Secret>');
+To build for release:
 
-Please ask @azaky to get the key :D
-
-The data was crawled in April 2015 and has 13855 records, which means that there are 13855 students who take at least a class in the second semester of 2014/2015. Those data are stored in Parse.
-
-## Demo
-
-http://sonnylazuardi.github.io/nim-finder-redux
-
-## License
-
-MIT licensed @sonnylazuardi
+```
+npm run bundle
+```

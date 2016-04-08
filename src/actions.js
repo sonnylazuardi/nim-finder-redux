@@ -1,4 +1,10 @@
-import Parse from 'parse';
+import {Platform} from 'react-native';
+
+if (Platform.OS == 'web') {
+    var Parse = require('parse');
+} else {
+    var Parse = require('parse/react-native');
+}
 
 Parse.initialize('6GR14ZdXnygzDxrcuwcULVp5k4ROUtRnnDgUqYD6', '7BiQmwbNXm1qZ6n5Mn69TCW03jfVAGEBy1cuX4M0');
 

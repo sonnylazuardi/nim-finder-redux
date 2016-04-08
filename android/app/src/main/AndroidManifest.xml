@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.nimfinderrn">
+    package="com.nimfinderredux">
 
     <uses-permission android:name="android.permission.INTERNET" />
 

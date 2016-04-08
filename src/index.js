@@ -4,7 +4,8 @@ import React, {
     View,
     TextInput,
     Text,
-    TouchableOpacity
+    TouchableOpacity,
+    ScrollView
 } from 'react-native';
 import thunkMiddleware from 'redux-thunk';
 import { createStore, applyMiddleware } from 'redux';
@@ -32,9 +33,9 @@ class App extends Component {
     }
     render() {
         return (
-            <View>
+            <ScrollView>
                 <View>
-                    <TextInput onChangeText={(search) => this.setState({search})} value={this.state.search} />
+                    <TextInput onChangeText={(search) => this.setState({search})} value={this.state.search} style={{height: 40, borderColor: 'gray', marginTop: 20}} />
                     <TouchableOpacity onPress={this.handleSubmit.bind(this)}>
                         <View style={{padding: 10, backgroundColor: '#ddd'}}>
                             <Text>{'Cari'}</Text>
@@ -46,7 +47,7 @@ class App extends Component {
                         <Text key={item.nim}>{item.nim} - {item.name}</Text>
                     ))}
                     {this.props.isFetching ?
-                        'Loading...'
+                        <Text>Loading...</Text>
                         :
                         (this.props.nims.length > 0 ?
                             (
@@ -60,7 +61,7 @@ class App extends Component {
                             )
                             : null)}
                 </View>
-            </View>
+            </ScrollView>
         );
     }
 };

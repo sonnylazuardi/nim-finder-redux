@@ -1,37 +1,71 @@
-const path = require('path')
-const webpack = require('webpack')
+'use strict';
 
-module.exports = {
-  devServer: {
-    contentBase: __dirname
-  },
+var fs = require('fs');
+var path = require('path');
+var webpack = require('webpack');
+
+var config = {
+
+  debug: true,
+
+  devtool: 'source-map',
+
   entry: {
-    example: path.join(__dirname, 'index.web.js')
+    'index.ios': ['./src/main.js'],
+    'index.android': ['./src/main.js'],
   },
-  module: {
-    loaders: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-        query: { cacheDirectory: true }
-      }
-    ]
-  },
+
   output: {
-    filename: 'bundle.js'
+    path: path.resolve(__dirname, 'build'),
+    filename: '[name].js',
   },
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
-    }),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin()
-  ],
-  resolve: {
-    alias: {
-      'react-native': 'react-native-web',
-      'react': path.join(__dirname, 'node_modules', 'react')
+
+  module: {
+    loaders: [{
+      test: /\.js$/,
+      exclude: [
+        path.resolve(__dirname, 'node_modules/react-native-web'),
+        path.resolve(__dirname, 'node_modules/react-dom'),
+      ],
+      include: [
+        path.resolve(__dirname, 'src'),
+        path.resolve(__dirname, 'node_modules/react-native'),
+      ],
+      loader: 'babel',
+      query: {
+        presets: ['es2015', 'stage-0', 'react'],
+      },
+    }]
+  },
+
+  plugins: [],
+
+};
+
+// Hot loader
+if (process.env.HOT) {
+  config.devtool = 'eval'; // Speed up incremental builds
+  config.entry['index.ios'].unshift('react-native-webpack-server/hot/entry');
+  config.entry['index.ios'].unshift('webpack/hot/only-dev-server');
+  config.entry['index.ios'].unshift('webpack-dev-server/client?http://localhost:8082');
+  config.output.publicPath = 'http://localhost:8082/';
+  config.plugins.unshift(new webpack.HotModuleReplacementPlugin());
+  config.module.loaders[0].query.plugins.push('react-transform');
+  config.module.loaders[0].query.extra = {
+    'react-transform': {
+      transforms: [{
+        transform: 'react-transform-hmr',
+        imports: ['react-native'],
+        locals: ['module']
+      }]
     }
-  }
+  };
 }
+
+// Production config
+if (process.env.NODE_ENV === 'production') {
+  config.plugins.push(new webpack.optimize.OccurrenceOrderPlugin());
+  config.plugins.push(new webpack.optimize.UglifyJsPlugin());
+}
+
+module.exports = config;
