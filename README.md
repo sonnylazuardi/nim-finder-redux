@@ -5,7 +5,7 @@ Data from Ahmad Zaky : https://github.com/azaky/nim-finder
 
 ![nimfinderapp](https://lh3.googleusercontent.com/-4BSU8hNorR0/VwdjWfjlOqI/AAAAAAAAKyI/3SlDoUOrBTMyMY3eaUvqMQFeMLwyj9-Rw/s0/blurred.png)
 
-## Installing
+## Installing on Web
 	
 Change directory to current repo 
 
@@ -14,6 +14,21 @@ Change directory to current repo
     npm run web
 
 Open `http://localhost:7000/`
+
+## Installing on React Native
+
+    npm start
+    
+For android call this
+
+    npm run android-setup-port
+    react-native run-android
+    
+For ios call this
+
+    react-native run-ios
+
+## Important Note
 
 Don't forget to change
 
