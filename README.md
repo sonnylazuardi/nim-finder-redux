@@ -3,7 +3,7 @@
 ITB NIM Finder App with Redux, ReactJS, Babel.
 Data from Ahmad Zaky : https://github.com/azaky/nim-finder
 
-![nimfinderapp](https://lh3.googleusercontent.com/-xJD_0V9az7Y/VmksqUSnhnI/AAAAAAAACAk/WYwpQArfraA/s0/Screen+Shot+2015-12-10+at+2.37.55+PM.png "nimfinder")
+![nimfinderapp](https://lh3.googleusercontent.com/-4BSU8hNorR0/VwdjWfjlOqI/AAAAAAAAKyI/3SlDoUOrBTMyMY3eaUvqMQFeMLwyj9-Rw/s0/blurred.png)
 
 ## Installing
 	
